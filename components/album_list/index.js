@@ -10,7 +10,12 @@ KISSY.add('components/album_list/index', function(S, Brick){
             
         },
         EVENTS : {
-        	
+        	'#J_list li' : {
+        		click : function(e){
+        			var curNode = $(e.currentTarget);
+        			
+        		}
+        	}
         }
     });
 
