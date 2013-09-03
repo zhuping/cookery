@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta&nbsp;charset="UTF-8">
+<title>test</title>
+<script type="text/javascript" src="Box2dWeb-2.1.a.3.min.js"></script> 
+<script type="text/javascript" src="lufylegend-1.7.7.js"></script> 
+</head>
+<body>
+<div id="mylegend">loading……</div>
+<script type="text/javascript">
+init(10,"mylegend",800,400,main);
+var backLayer,cLayer,wallLayer,bitmap,loadingLayer;
+var imglist = {};
+var imgData = new Array(
+		{name:"bird1",path:"http://img.my.csdn.net/uploads/201206/12/1339458456_4592.png"},
+		{name:"bird2",path:"http://img.my.csdn.net/uploads/201206/12/1339515847_1195.png"},
+		{name:"stage01",path:"http://img.my.csdn.net/uploads/201206/12/1339458456_9538.png"}
+		);
+function main(){	
+	LGlobal.setDebug(false);	
+	backLayer = new LSprite();	
+	addChild(backLayer);	
+	
+	
+	loadingLayer = new LoadingSample3();
+	backLayer.addChild(loadingLayer);	
+	LLoadManage.load(
+		imgData,
+		function(progress){
+			loadingLayer.setProgress(progress);
+		},
+		function(result){
+			imglist = result;
+			backLayer.removeChild(loadingLayer);
+			loadingLayer = null;
+			gameInit();
+		}
+	);
+}
+function gameInit(event){
+	LGlobal.box2d = new LBox2d();
+	
+	
+	wallLayer = new LSprite();
+	wallLayer.graphics.drawRect(10,"#000000",[0, 0, 800, 400],true,"#cccc80");
+	wallLayer.alpha = 0.3;
+	backLayer.addChild(wallLayer);
+	
+	wallLayer = new LSprite();
+	wallLayer.x = 400;
+	wallLayer.y = 0;
+	backLayer.addChild(wallLayer);
+	wallLayer.addBodyPolygon(800,10,0);
+	wallLayer = new LSprite();
+	wallLayer.x = 0;
+	wallLayer.y = 200;
+	backLayer.addChild(wallLayer);
+	wallLayer.addBodyPolygon(10,400,0);
+	wallLayer = new LSprite();
+	wallLayer.x = 400;
+	wallLayer.y = 400;
+	backLayer.addChild(wallLayer);
+	wallLayer.addBodyPolygon(800,10,0);
+	wallLayer = new LSprite();
+	wallLayer.x = 800;
+	wallLayer.y = 200;
+	backLayer.addChild(wallLayer);
+	wallLayer.addBodyPolygon(10,400,0);
+	
+	
+	backLayer.addEventListener(LMouseEvent.MOUSE_UP,add);
+}
+function add(){
+	var rand = Math.random();
+	if(rand < 0.33){
+		cLayer = new LSprite();
+		cLayer.x = 50 + Math.random()*700;
+		cLayer.y = 50;
+		backLayer.addChild(cLayer);
+		bitmap = new LBitmap(new LBitmapData(imglist["bird1"]));
+		cLayer.addChild(bitmap);
+		cLayer.addBodyCircle(bitmap.getWidth()*0.5,bitmap.getHeight()*0.5,bitmap.getWidth()*0.5,1,.5,.4,.5);
+	}else if(rand < 0.66){
+		cLayer = new LSprite();
+		backLayer.addChild(cLayer);
+		bitmap = new LBitmap(new LBitmapData(imglist["bird2"]));
+		cLayer.addChild(bitmap);
+		var shapeArray = [
+			[[0,54],[27,0],[54,54]]
+		];
+		cLayer.addBodyVertices(shapeArray,27,27,1,.5,.4,.5);
+		cLayer.box2dBody.SetPosition(new LGlobal.box2d.b2Vec2((50 + Math.random()*700)/LGlobal.box2d.drawScale,50/LGlobal.box2d.drawScale));
+	}else{
+		cLayer = new LSprite();
+		cLayer.x = 50 + Math.random()*700;
+		cLayer.y = 50;
+		backLayer.addChild(cLayer);
+		bitmap = new LBitmap(new LBitmapData(imglist["stage01"]));
+		cLayer.addChild(bitmap);
+		cLayer.addBodyPolygon(bitmap.getWidth(),bitmap.getHeight(),1,5,.4,.2);
+	}
+}
+</script> 
+</body>
+</html>

@@ -28,8 +28,8 @@
 }
 
 .user_list li {
-	width: 220px;
-	height: 220px;
+	width: 130px;
+	height: 130px;
 	float: left;
 	margin: 10px;
 	cursor: pointer;
@@ -45,8 +45,8 @@
 
 .ch-info-wrap {
 	position: absolute;
-	width: 180px;
-	height: 180px;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
 	-webkit-perspective: 800px;
 	-moz-perspective: 800px;
@@ -58,16 +58,16 @@
 	-o-transition: all 0.4s ease-in-out;
 	-ms-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
-	top: 20px;
-	left: 20px;
+	top: 15px;
+	left: 15px;
 	background-color: #f9f9f9;
 	box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.2), inset 0 0 3px rgba(115, 114, 23, 0.8);
 }
 
 .ch-info {
 	position: absolute;
-	width: 180px;
-	height: 180px;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
 	-webkit-transition: all 0.4s ease-in-out;
 	-moz-transition: all 0.4s ease-in-out;
@@ -121,33 +121,6 @@
 		0 1px 2px rgba(0,0,0,0.3);
 }
 
-.ch-info p {
-	color: #fff;
-	padding: 10px 5px;
-	font-style: italic;
-	margin: 0 30px;
-	font-size: 12px;
-	border-top: 1px solid rgba(255,255,255,0.5);
-}
-
-.ch-info p a {
-	display: block;
-	color: #fff;
-	color: rgba(255,255,255,0.7);
-	font-style: normal;
-	font-weight: 700;
-	text-transform: uppercase;
-	font-size: 9px;
-	letter-spacing: 1px;
-	padding-top: 4px;
-	font-family: 'Open Sans', Arial, sans-serif;
-}
-
-.ch-info p a:hover {
-	color: #fff222;
-	color: rgba(255,242,34, 0.8);
-}
-
 .user_list li .avatar:hover .ch-info-wrap {
 	box-shadow: 
 		0 0 0 0 rgba(255,255,255,0.8), 
@@ -160,5 +133,44 @@
 	-o-transform: rotate3d(0,1,0,-180deg);
 	-ms-transform: rotate3d(0,1,0,-180deg);
 	transform: rotate3d(0,1,0,-180deg);
+}
+
+.area {
+	margin-top: 10px;
+	border-bottom: 3px solid #ddd;
+	height: 100px;
+}
+
+.area ul {
+	height: 100px;
+}
+
+.area li {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	cursor: pointer;
+	display: block;
+}
+
+.src_node {
+	list-style: none;
+}
+
+.src_node .avatar{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	display: block;
+}
+
+.src_node .delete {
+	font-size: 10px;
+	color: #ccc;
+	cursor: pointer;
+	position: absolute;
+	right: 3px;
+	top: -2px;
+	display: none;
 }
 
