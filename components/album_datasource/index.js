@@ -5,54 +5,52 @@ KISSY.add('components/album_datasource/index', function(S, Pagelet, Brick, IO, X
     var info = [];
 
     ds.getUser = function() {
-        IO({
-            dataType: 'jsonp',
-            url: 'https://api.weibo.com/2/statuses/timeline_batch.json',
-            data: {
-                'source': '2866968258',
-                'screen_names': user.join(','),
-                'count': user.length
-            },
-            jsonpCallback: 'jsoncallback',
-            success: function(result){
-                var statuses = result.data.statuses;
-                for(var i=0; i<statuses.length; i++) {
-                    info[i] = {
-                        id: statuses[i].id,
-                        nick: statuses[i].user.name,
-                        avatar: statuses[i].user.avatar_large,
-                        profile_url: statuses[i].user.profile_url
-                    }
-                }
-                ds.render(info);
-            }
-        });
-        // for(var i=0; i<user.length; i++) {
-        //     (function(i){
-        //         IO({
-        //             dataType: 'jsonp',
-        //             url: 'https://api.weibo.com/2/users/show.json',
-        //             data: {
-        //                 'source': '2866968258',
-        //                 'screen_name': user[i]
-        //             },
-        //             success: function(result){
-        //                 var data = result.data;
-        //                 info[i] = {
-        //                     id: data.id,
-        //                     nick: data.name,
-        //                     avatar: data.avatar_hd,
-        //                     domain: data.domain ? data.domain : data.id
-        //                 };
-        //                 console.log(info);
+        // IO({
+        //     dataType: 'jsonp',
+        //     url: 'https://api.weibo.com/2/statuses/timeline_batch.json',
+        //     data: {
+        //         'source': '2866968258',
+        //         'screen_names': user.join(','),
+        //         'count': user.length
+        //     },
+        //     jsonpCallback: 'jsoncallback',
+        //     success: function(result){
+        //         var statuses = result.data.statuses;
+        //         for(var i=0; i<statuses.length; i++) {
+        //             info[i] = {
+        //                 id: statuses[i].id,
+        //                 nick: statuses[i].user.name,
+        //                 avatar: statuses[i].user.avatar_large,
+        //                 profile_url: statuses[i].user.profile_url
         //             }
-        //         });
-        //     })(i)
-        // }
+        //         }
+        //         ds.render(info);
+        //     }
+        // });
+        for(var i=0; i<user.length; i++) {
+            IO({
+                dataType: 'jsonp',
+                url: 'https://api.weibo.com/2/users/show.json',
+                data: {
+                    'source': '2866968258',
+                    'screen_name': user[i]
+                },
+                success: function(result){
+                    var data = result.data;
+                    info[i] = {
+                        id: data.id,
+                        nick: data.name,
+                        avatar: data.avatar_hd,
+                        profile_url: data.profile_url
+                    };
+                    ds.render(info[i]);
+                }
+            });
+        }
     }
 
     ds.render = function(user) {
-        var tpl = '{{#each data}}<li data-avatar="{{avatar}}" data-uid="{{id}}">' + 
+        var tpl = '{{#with data}}<li data-avatar="{{avatar}}" data-uid="{{id}}">' + 
                 '<div class="avatar" style="background: url({{avatar}}) center center">' + 
                     '<div class="ch-info-wrap">' + 
                         '<div class="ch-info">' + 
@@ -63,13 +61,13 @@ KISSY.add('components/album_datasource/index', function(S, Pagelet, Brick, IO, X
                             '</div>' + 
                         '</div>' + 
                     '</div>' + 
-                '</li>{{/each}}';
+                '</li>{{/with}}';
 
         var data = {
             data : user
         };
         var render = new XTemplate(tpl).render(data);
-        $('#J_list').html(render);
+        $('#J_list').append(render);
     }
     
     return ds;
