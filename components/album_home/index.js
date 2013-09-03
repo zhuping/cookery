@@ -1,10 +1,11 @@
- KISSY.add('components/album_home/index', function(S, Brick ,Helper){
+ KISSY.add('components/album_home/index', function(S, Brick ,Helper, DS){
     var $ = S.all;
 
     var View = Brick.extend({
         bindUI : function(){
             var self = this;
 
+            DS.getUser();
         }
 
     },{
@@ -46,4 +47,4 @@
 
     return View;
 
- },{requires:['brix/core/brick','components/custom_helper/']});
+ },{requires:['brix/core/brick','components/custom_helper/','components/album_datasource/']});
