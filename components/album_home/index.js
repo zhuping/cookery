@@ -25,23 +25,19 @@
                         curNode.remove();
                     });
                 }
+            },
+            '.start' : {
+                click : function(e){
+                    e.preventDefault();
+                    var self = this; 
+                    var target = S.one(e.currentTarget);
+                    if(!self.isChouJiang && !target.hasClass('btn-disabled')) {
+                        var Luck = self.pagelet.getBrick('J_pool');
+                        self.isChouJiang = true;
+                        Luck.start();
+                    }
+                }
             }
-            // ,
-            // '#J_area li' : {
-            //     mouseover : function(e){
-            //         var curNode = $(e.currentTarget);
-            //         curNode.one('.delete').css('display','block');
-            //     },
-            //     mouseout : function(e){
-            //         var curNode = $(e.currentTarget);
-            //         curNode.one('.delete').css('display','none');
-            //     }
-            // },
-            // '.delete' : {
-            //     click : function(e){
-
-            //     }
-            // }
         }
     });
 

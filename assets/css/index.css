@@ -1,10 +1,14 @@
 #container {
 	width: 990px;
 	margin: 0 auto;
+	text-align: center;
 }
 
 .award_pool {
 	border: 3px solid #ddd;
+}
+
+#J_pool {
 	padding: 10px;
 	height: 280px;
 }
@@ -191,5 +195,11 @@
 	right: 3px;
 	top: -2px;
 	display: none;
+}
+
+#container .start {
+	font-weight: normal;
+	margin-top: 10px;
+	text-decoration: none;
 }
 

@@ -1,8 +1,5 @@
 KISSY.add('components/album_datasource/index', function(S, Pagelet, Brick, IO, XTemplate){
-    var ds = {}, $ = S.all;
-    
-    var user = ['贾克斯L','sandy_猫猫','NatcolFeng','妖妖不怪','猫爱shu'];
-    var info = [];
+    var ds = {}, $ = S.all, info = [];
 
     ds.getUser = function() {
         // IO({
@@ -27,13 +24,13 @@ KISSY.add('components/album_datasource/index', function(S, Pagelet, Brick, IO, X
         //         ds.render(info);
         //     }
         // });
-        for(var i=0; i<user.length; i++) {
+        for(var i=0; i<window.user.length; i++) {
             IO({
                 dataType: 'jsonp',
                 url: 'https://api.weibo.com/2/users/show.json',
                 data: {
-                    'source': '2866968258',
-                    'screen_name': user[i]
+                    'source': '1362404091',
+                    'screen_name': window.user[i]
                 },
                 success: function(result){
                     var data = result.data;
@@ -56,7 +53,7 @@ KISSY.add('components/album_datasource/index', function(S, Pagelet, Brick, IO, X
                         '<div class="ch-info">' + 
                             '<div class="ch-info-front" style="background: url({{avatar}}) center center"></div>' + 
                                 '<div class="ch-info-back">' + 
-                                    '<h3><a href="http://weibo.com/{{profile_url}}" target="_blank">{{nick}}</a></h3>' + 
+                                    '<h3>{{nick}}</h3>' + 
                                 '</div>' + 
                             '</div>' + 
                         '</div>' + 
