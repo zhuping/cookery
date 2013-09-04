@@ -20,7 +20,7 @@
                         avatar: curNode.attr('data-avatar'),
                         uid: curNode.attr('data-uid')
                     };
-                    Helper.addAnim(curNode, data);
+                    Helper.addAnim(curNode, data, 1);
                     curNode.animate({opacity:0}, 1, 'backOut', function(){
                         curNode.remove();
                     });
@@ -35,6 +35,13 @@
                         var Luck = self.pagelet.getBrick('J_pool');
                         self.isChouJiang = true;
                         Luck.start();
+                        S.later(function() {
+                            Luck.stop();
+                            S.later(function() {
+                                Luck.moveLucky();
+                                
+                            }, 2000);
+                        }, 5000);
                     }
                 }
             }

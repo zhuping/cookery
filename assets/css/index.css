@@ -11,6 +11,7 @@
 #J_pool {
 	padding: 10px;
 	height: 280px;
+	position: relative;
 }
 
 .user_list {
@@ -201,5 +202,18 @@
 	font-weight: normal;
 	margin-top: 10px;
 	text-decoration: none;
+}
+
+#J_pool li.selected {
+	-webkit-transition: 0.3s ease-in;
+  	-webkit-transition-property: width, height;
+  	z-index: 99999 !important;
+}
+
+#J_pool li.selected span{
+	width: 180px;
+	height: 180px;
+	-webkit-transition: 0.3s ease-in;
+  	-webkit-transition-property: width, height;
 }
 

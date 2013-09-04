@@ -1,7 +1,5 @@
-KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTING) {
-    // var TMPL = '@TEMPLATE|' + Brix.absoluteFilePath(this, 'index.html') + '|TEMPLATE@';
+KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
     var $ = Node.all;
-    // Helpers
 
     function r(from, to) {
         from = from || 0;
@@ -43,13 +41,13 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
     }
 
 
-    var CANVAS_HEIGHT = 400;
-    var CANVAS_WIDTH = 900;
+    var CANVAS_HEIGHT = 260;
+    var CANVAS_WIDTH = 980;
 
-    var BALL_WIDTH = 50;
-    var BALL_HEIGHT = 50;
-    var LUCKY_BALL_WIDTH = 306;
-    var LUCKY_BALL_HEIGHT = 306;
+    var BALL_WIDTH = 100;
+    var BALL_HEIGHT = 100;
+    var LUCKY_BALL_WIDTH = 180;
+    var LUCKY_BALL_HEIGHT = 180;
     var MAX_ZINDEX = 3000;
 
     var DURATION_MIN = 100;
@@ -61,8 +59,6 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
 
     function User(el, options, i) {
         this.options = options;
-        this.left = 430;
-        this.top = -75;
         this.x = 0;
         this.y = 0;
         this.width = BALL_WIDTH;
@@ -71,11 +67,6 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
         this.lucky = false;
         this.zooming = false;
         this.el = el;
-        var p = POINTS[i];
-        if (p) {
-            this.left = p.x;
-            this.top = p.y - 30; //数据问题，所以做了这个兼容处理
-        }
         this.zIndex = r(0, MAX_ZINDEX);
         this.reflow();
     }
@@ -136,7 +127,8 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
         var that = this;
         this.lucky = true;
         this.el.addClass('selected');
-        this.el.one('h3').html(SETTING.name);
+        this.el.one('span').css('background-size','180px');
+        // this.el.one('h3').html(SETTING.name);
         this.left = (CANVAS_WIDTH - LUCKY_BALL_WIDTH) / 2;
         this.top = (CANVAS_HEIGHT - LUCKY_BALL_HEIGHT) / 2;
         this.width = LUCKY_BALL_WIDTH;
@@ -169,31 +161,23 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
     return Brick.extend({
         bindUI: function() {
             var self = this;
-            self.luckyUser = null;
-            var balls = $('#J_pool').all('li');
-            var users = self.get('data').users;
-            balls.each(function(el, i) {
-                S.later(function() {
-                    self.users.push(new User(el, users[i], i));
-                }, r(DURATION_MIN, DURATION_MAX));
-            })
-            S.each(self.get('users'), function(o, i) {
-                S.later(function() {
-                    self.users.push(new User(o, i));
-                }, r(DURATION_MIN, DURATION_MAX));
-            });
-        },
-        users: [],
-        i: 0,
-        init: function(data) {
 
         },
+        init: function() {
+            var self = this;
+            self.luckyUser = null;
+            self.users = [];
+            var balls = $('#J_pool').all('li');
+            balls.each(function(el, i) {
+                self.users.push(new User(el, balls[i], i));
+            })
+        },
         start: function() {
+            this.init();
             this.timer && clearTimeout(this.timer);
             this.users.forEach(function(user) {
                 user.start();
             })
-            //this._start();
         },
         _start: function() {
             var self = this;
@@ -201,7 +185,6 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
             ul.animate({
                 'left': -306
             }, 0.2, 'easeNone', function() {
-                //self.stop();
                 ul.one('li').appendTo('.balls');
                 ul.css({
                     left: 0
@@ -247,11 +230,14 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
         moveLucky: function() {
             var luckyUser = this.luckyUser;
             if (luckyUser) {
-                luckyUser.el.removeClass('selected');
-                luckyUser.el.one('p').remove();
-                luckyUser.el.one('h3').remove();
-                luckyUser.el.prependTo('#lucky-balls,#lucky-balls' + SETTING.index);
+
+                // luckyUser.el.removeClass('selected');
+                // luckyUser.el.one('p').remove();
+                // luckyUser.el.one('h3').remove();
+                // luckyUser.el.prependTo('#lucky-balls,#lucky-balls' + SETTING.index);
+                Helpers.addAnim(luckyUser.el, null, 2);
                 this.removeItem(luckyUser);
+
                 this.luckyUser = null;
             }
         },
@@ -297,5 +283,5 @@ KISSY.add('components/luck/index', function(S, Node, Brick, POINTS, USERS, SETTI
     }, 'Luck');
 
 }, {
-    requires: ['node', 'brix/core/brick', 'components/album_points/index', 'components/users/index', 'components/setting/index','./index.css']
+    requires: ['node', 'brix/core/brick', 'components/custom_helper/']
 });
