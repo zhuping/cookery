@@ -28,52 +28,30 @@ KISSY.add('components/custom_helper/index', function(S, Pagelet, Brick){
         return pos;
     };
 
-    helper.addAnim = function(startPlace, data, type){
+    helper.addAnim = function(startPlace, data){
         var sOffset = startPlace.offset();
+        var pos = helper.randomPos();
 
-        if(type == 1) {
-            var pos = helper.randomPos();
+        var name = data.name;
+        var avatar = data.avatar;
+        var cloneNode = S.one('<li class="src_node" data-avatar="' + avatar +'" data-name="' + name + '">' + 
+        		'<span style="background:url(' + avatar + ') center center;background-size:100px 100px;" class="avatar"></span>' + 
+        		'<i class="iconfont delete">&#356</i>' + 
+        	'</li>');
 
-            var src = data.avatar;
-            var uid = data.uid;
-            var cloneNode = S.one('<li class="src_node">' + 
-            		'<span style="background:url(' + src + ') center center;background-size:100px 100px;" data-uid="' + uid + '" class="avatar"></span>' + 
-            		'<i class="iconfont delete">&#356</i>' + 
-            	'</li>');
-
-            cloneNode.css({
-                'position': 'absolute',
-                'top': sOffset.top,
-                'left': sOffset.left
-            });
-            S.one('body').append(cloneNode);
-            cloneNode.animate({
-                'left': pos.left,
-                'top': pos.top,
-                'width': '100px',
-                'height': '100px'
-                }, 0.7, 'backOut', function(){
-                    helper.append(cloneNode, pos);
-                }
-            );
-        }else if(type == 2) {
-            cloneNode.css({
-                'position': 'absolute',
-                'top': sOffset.top,
-                'left': sOffset.left
-            });
-            S.one('body').append(cloneNode);
-            cloneNode.animate({
-                'left': pos.left,
-                'top': pos.top,
-                'width': '100px',
-                'height': '100px'
-                }, 0.7, 'backOut', function(){
-                    helper.append(cloneNode, pos);
-                }
-            );
-        }
-        
+        cloneNode.css({
+            'position': 'absolute',
+            'top': sOffset.top,
+            'left': sOffset.left
+        });
+        S.one('body').append(cloneNode);
+        cloneNode.animate({
+            'left': pos.left,
+            'top': pos.top
+            }, 0.7, 'backOut', function(){
+                helper.append(cloneNode, pos);
+            }
+        );
     };
 
     helper.append = function(node, pos) {

@@ -1,3 +1,7 @@
+body {
+	background: url(../images/bg.jpg) repeat;
+	height: 1000px;
+}
 #container {
 	width: 990px;
 	margin: 0 auto;
@@ -5,7 +9,7 @@
 }
 
 .award_pool {
-	border: 3px solid #ddd;
+	border: 3px solid #999;
 }
 
 #J_pool {
@@ -27,7 +31,7 @@
 }
 
 .user_list ul{
-	border: 3px solid #ddd;
+	border: 3px solid #999;
 	border-radius: 10px;
 	padding: 10px;
 }
@@ -36,7 +40,7 @@
 	width: 130px;
 	height: 130px;
 	float: left;
-	margin: 10px;
+	margin: 15px;
 	cursor: pointer;
 }
 
@@ -161,20 +165,8 @@
 
 .area {
 	margin-top: 10px;
-	border-bottom: 3px solid #ddd;
-	height: 100px;
-}
-
-.area ul {
-	height: 100px;
-}
-
-.area li {
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	cursor: pointer;
-	display: block;
+	border-bottom: 3px solid #999;
+	height: 130px;
 }
 
 .src_node {
@@ -205,15 +197,17 @@
 }
 
 #J_pool li.selected {
-	-webkit-transition: 0.3s ease-in;
-  	-webkit-transition-property: width, height;
+	-webkit-transition: all 0.3s ease-in;
   	z-index: 99999 !important;
 }
 
 #J_pool li.selected span{
 	width: 180px;
 	height: 180px;
-	-webkit-transition: 0.3s ease-in;
-  	-webkit-transition-property: width, height;
+	-webkit-transition: all 0.3s ease-in;
+}
+
+#J_area li {
+	margin: 0;
 }
 

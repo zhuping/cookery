@@ -41,7 +41,7 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
     }
 
 
-    var CANVAS_HEIGHT = 260;
+    var CANVAS_HEIGHT = 300;
     var CANVAS_WIDTH = 980;
 
     var BALL_WIDTH = 100;
@@ -100,10 +100,10 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
         this.lucky = false;
 
         this.el.removeClass('selected');
-        this.el.css({
-            width: BALL_WIDTH,
-            height: BALL_HEIGHT
-        });
+        // this.el.css({
+        //     width: BALL_WIDTH,
+        //     height: BALL_HEIGHT
+        // });
 
         this._maxTop = CANVAS_HEIGHT - BALL_HEIGHT;
         this._maxLeft = CANVAS_WIDTH - BALL_WIDTH;
@@ -128,7 +128,6 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
         this.lucky = true;
         this.el.addClass('selected');
         this.el.one('span').css('background-size','180px');
-        // this.el.one('h3').html(SETTING.name);
         this.left = (CANVAS_WIDTH - LUCKY_BALL_WIDTH) / 2;
         this.top = (CANVAS_HEIGHT - LUCKY_BALL_HEIGHT) / 2;
         this.width = LUCKY_BALL_WIDTH;
@@ -137,9 +136,7 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
         this.zooming = true
         this.el.animate({
             'left': this.left,
-            'top': this.top,
-            'width': LUCKY_BALL_WIDTH,
-            'height': LUCKY_BALL_HEIGHT
+            'top': this.top
         }, ZOOM_DURATION, function() {
             that.zooming = false;
         })
@@ -230,12 +227,26 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
         moveLucky: function() {
             var luckyUser = this.luckyUser;
             if (luckyUser) {
-
-                // luckyUser.el.removeClass('selected');
-                // luckyUser.el.one('p').remove();
-                // luckyUser.el.one('h3').remove();
-                // luckyUser.el.prependTo('#lucky-balls,#lucky-balls' + SETTING.index);
-                Helpers.addAnim(luckyUser.el, null, 2);
+                // luckyUser.el.css({'position':'static','width':'100px','height':'100px','float':'left'});
+                // luckyUser.el.one('span').css('background-size','100px');
+                var el = luckyUser.el;
+                var name = el.attr('data-name');
+                var avatar = el.attr('data-avatar');
+                var cloneNode = Node('<li>' + 
+                    '<div class="avatar" style="background: url('+ avatar + ') center center">' + 
+                        '<div class="ch-info-wrap">' + 
+                            '<div class="ch-info">' + 
+                                '<div class="ch-info-front" style="background: url(' + avatar + ') center center #f9f9f9"></div>' + 
+                                    '<div class="ch-info-back">' + 
+                                        '<h3>' + name + '</h3>' + 
+                                    '</div>' + 
+                                '</div>' + 
+                            '</div>' + 
+                        '</div>' + 
+                    '</li>');
+                
+                luckyUser.el.remove();
+                cloneNode.prependTo('#J_area');
                 this.removeItem(luckyUser);
 
                 this.luckyUser = null;
@@ -271,14 +282,7 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
         }
     }, {
         ATTRS: {
-            tmpl: {
-                // value: TMPL
-            },
-            data: {
-                value: {
-                    // users: USERS
-                }
-            }
+            
         }
     }, 'Luck');
 

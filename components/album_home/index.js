@@ -17,10 +17,10 @@
                 click : function(e){
                     var curNode = $(e.currentTarget);
                     var data = {
-                        avatar: curNode.attr('data-avatar'),
-                        uid: curNode.attr('data-uid')
+                        name: curNode.attr('data-name'),
+                        avatar: curNode.attr('data-avatar')
                     };
-                    Helper.addAnim(curNode, data, 1);
+                    Helper.addAnim(curNode, data);
                     curNode.animate({opacity:0}, 1, 'backOut', function(){
                         curNode.remove();
                     });
@@ -39,9 +39,10 @@
                             Luck.stop();
                             S.later(function() {
                                 Luck.moveLucky();
-                                
-                            }, 2000);
-                        }, 5000);
+                                self.isChouJiang = false;
+
+                            }, 5000);
+                        }, 10000);
                     }
                 }
             }

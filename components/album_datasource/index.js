@@ -25,35 +25,36 @@ KISSY.add('components/album_datasource/index', function(S, Pagelet, Brick, IO, X
         //     }
         // });
         for(var i=0; i<window.user.length; i++) {
-            IO({
-                dataType: 'jsonp',
-                url: 'https://api.weibo.com/2/users/show.json',
-                data: {
-                    'source': '1362404091',
-                    'screen_name': window.user[i]
-                },
-                success: function(result){
-                    var data = result.data;
-                    info[i] = {
-                        id: data.id,
-                        nick: data.name,
-                        avatar: data.avatar_hd,
-                        profile_url: data.profile_url
-                    };
-                    ds.render(info[i]);
-                }
-            });
+            (function(i){
+                IO({
+                    dataType: 'jsonp',
+                    url: 'https://api.weibo.com/2/users/show.json',
+                    data: {
+                        'source': '1362404091',
+                        'screen_name': window.user[i].screen_name
+                    },
+                    success: function(result){
+                        var data = result.data;
+                        info[i] = {
+                            avatar: data.avatar_hd,
+                            profile_url: data.profile_url,
+                            name: window.user[i].name
+                        };
+                        ds.render(info[i]);
+                    }
+                });
+            })(i)
         }
     }
 
     ds.render = function(user) {
-        var tpl = '{{#with data}}<li data-avatar="{{avatar}}" data-uid="{{id}}">' + 
+        var tpl = '{{#with data}}<li data-avatar="{{avatar}}" data-name="{{name}}">' + 
                 '<div class="avatar" style="background: url({{avatar}}) center center">' + 
                     '<div class="ch-info-wrap">' + 
                         '<div class="ch-info">' + 
-                            '<div class="ch-info-front" style="background: url({{avatar}}) center center"></div>' + 
+                            '<div class="ch-info-front" style="background: url({{avatar}}) center center #f9f9f9"></div>' + 
                                 '<div class="ch-info-back">' + 
-                                    '<h3>{{nick}}</h3>' + 
+                                    '<h3>{{name}}</h3>' + 
                                 '</div>' + 
                             '</div>' + 
                         '</div>' + 
