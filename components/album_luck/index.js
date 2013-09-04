@@ -227,8 +227,6 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
         moveLucky: function() {
             var luckyUser = this.luckyUser;
             if (luckyUser) {
-                // luckyUser.el.css({'position':'static','width':'100px','height':'100px','float':'left'});
-                // luckyUser.el.one('span').css('background-size','100px');
                 var el = luckyUser.el;
                 var name = el.attr('data-name');
                 var avatar = el.attr('data-avatar');
@@ -244,7 +242,7 @@ KISSY.add('components/album_luck/index', function(S, Node, Brick, Helpers) {
                             '</div>' + 
                         '</div>' + 
                     '</li>');
-                
+
                 luckyUser.el.remove();
                 cloneNode.prependTo('#J_area');
                 this.removeItem(luckyUser);
