@@ -2,7 +2,7 @@ Cookery
 =======
 
 ###About###
-    抽选中奖人
+    抽奖器
 ![Alt text](http://img3.douban.com/view/photo/photo/public/p2121273902.jpg)
 
 #####参考#####
