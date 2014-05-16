@@ -1,0 +1,213 @@
+body {
+	background: url(../images/bg.jpg) repeat;
+	height: 1000px;
+}
+#container {
+	width: 990px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.award_pool {
+	border: 3px solid #999;
+}
+
+#J_pool {
+	padding: 10px;
+	height: 280px;
+	position: relative;
+}
+
+.user_list {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.user_list h3 {
+	font-size: 18px;
+	color: #262635;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.user_list ul{
+	border: 3px solid #999;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.user_list li {
+	width: 130px;
+	height: 130px;
+	float: left;
+	margin: 15px;
+	cursor: pointer;
+}
+
+.user_list li .avatar {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	position: relative;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ch-info-wrap {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	-webkit-perspective: 800px;
+	-moz-perspective: 800px;
+	-o-perspective: 800px;
+	-ms-perspective: 800px;
+	perspective: 800px;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	top: 15px;
+	left: 15px;
+	background-color: #f9f9f9;
+	box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.2), inset 0 0 3px rgba(115, 114, 23, 0.8);
+}
+
+.ch-info {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+		
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.ch-info > div {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-position: center center;
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.ch-info .ch-info-back {
+	-webkit-transform: rotate3d(0,1,0,180deg);
+	-moz-transform: rotate3d(0,1,0,180deg);
+	-o-transform: rotate3d(0,1,0,180deg);
+	-ms-transform: rotate3d(0,1,0,180deg);
+	transform: rotate3d(0,1,0,180deg);
+	
+	background: #000;
+}
+
+.ch-info .ch-info-back a {
+	display: block;
+	color: #fff;
+	color: rgba(255,255,255,0.7);
+	font-style: normal;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 9px;
+	letter-spacing: 1px;
+	padding-top: 4px;
+	font-family: 'Open Sans', Arial, sans-serif;
+	text-decoration: none;
+}
+
+.ch-info .ch-info-back a:hover {
+	color: #fff222;
+	color: rgba(255,242,34, 0.8);
+}
+
+.ch-info h3 {
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 14px;
+	margin: 0 15px;
+	padding: 40px 0 0 0;
+	height: 50px;
+	font-family: 'Open Sans', Arial, sans-serif;
+	text-shadow: 
+		0 0 1px #fff, 
+		0 1px 2px rgba(0,0,0,0.3);
+}
+
+.user_list li .avatar:hover .ch-info-wrap {
+	box-shadow: 
+		0 0 0 0 rgba(255,255,255,0.8), 
+		inset 0 0 3px rgba(115,114, 23, 0.8);
+}
+
+.user_list li .avatar:hover .ch-info {
+	-webkit-transform: rotate3d(0,1,0,-180deg);
+	-moz-transform: rotate3d(0,1,0,-180deg);
+	-o-transform: rotate3d(0,1,0,-180deg);
+	-ms-transform: rotate3d(0,1,0,-180deg);
+	transform: rotate3d(0,1,0,-180deg);
+}
+
+.area {
+	margin-top: 10px;
+	border-bottom: 3px solid #999;
+	height: 130px;
+}
+
+.src_node {
+	list-style: none;
+}
+
+.src_node .avatar{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	display: block;
+}
+
+.src_node .delete {
+	font-size: 10px;
+	color: #ccc;
+	cursor: pointer;
+	position: absolute;
+	right: 3px;
+	top: -2px;
+	display: none;
+}
+
+#container .start {
+	font-weight: normal;
+	margin-top: 10px;
+	text-decoration: none;
+}
+
+#J_pool li.selected {
+	-webkit-transition: all 0.3s ease-in;
+  	z-index: 99999 !important;
+}
+
+#J_pool li.selected span{
+	width: 180px;
+	height: 180px;
+	-webkit-transition: all 0.3s ease-in;
+}
+
+#J_area li {
+	margin: 0;
+}
+
